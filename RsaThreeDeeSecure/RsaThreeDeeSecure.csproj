@@ -7,7 +7,7 @@
         <Authors>PeteGee</Authors>
         <Company>Deft NZ</Company>
         <Description>Basic Library to do the heavy lifting when implementing RSA 3D Secure Version 3.0 and above.</Description>
-        <PackageLicenseUrl>https://github.com/petegee/RsaThreeDeeSecure/blob/master/LICENSE</PackageLicenseUrl>
+        <license type="file">LICENSE</license>
         <Copyright>MIT Licence</Copyright>
         <PackageProjectUrl>https://github.com/petegee/RsaThreeDeeSecure</PackageProjectUrl>
         <RepositoryUrl>https://github.com/petegee/RsaThreeDeeSecure</RepositoryUrl>
