@@ -17,4 +17,4 @@ jobs:
     - name: Publish to Nuget
       run: |
         dotnet pack
-        dotnet nuget push RsaThreeDeeSecure.1.0.0.nupkg -k {token} -s https://api.nuget.org/v3/index.json
+        dotnet nuget push RsaThreeDeeSecure.1.0.0.nupkg -k ${{nuget_token}} -s https://api.nuget.org/v3/index.json
