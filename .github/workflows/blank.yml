@@ -16,5 +16,5 @@ jobs:
         dotnet test
     - name: Publish to Nuget
       run: |
-        dotnet pack
-        dotnet nuget push RsaThreeDeeSecure.1.0.0.nupkg -k ${{ secrets.nuget_token }} -s https://api.nuget.org/v3/index.json
+        dotnet pack --configuration Release
+        dotnet nuget push .././RsaThreeDeeSecure/bin/Debug/RsaThreeDeeSecure.1.0.0.nupkg -k ${{ secrets.nuget_token }} -s https://api.nuget.org/v3/index.json
