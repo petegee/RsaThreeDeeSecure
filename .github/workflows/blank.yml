@@ -14,3 +14,7 @@ jobs:
     - name: Unit Test
       run: |
         dotnet test
+    - name: Publish to Nuget
+      run: |
+        dotnet pack
+        dotnet nuget push RsaThreeDeeSecure.1.0.0.nupkg -k {token} -s https://api.nuget.org/v3/index.json
