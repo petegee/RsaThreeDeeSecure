@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RsaThreeDeeSecure", "RsaThreeDeeSecure\RsaThreeDeeSecure.csproj", "{648A09D0-3AB7-4E14-A810-F585A978F421}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{031E7F31-B8EA-4CE0-A9A4-ACEB7B63040D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{648A09D0-3AB7-4E14-A810-F585A978F421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{648A09D0-3AB7-4E14-A810-F585A978F421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{648A09D0-3AB7-4E14-A810-F585A978F421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{648A09D0-3AB7-4E14-A810-F585A978F421}.Release|Any CPU.Build.0 = Release|Any CPU
+		{031E7F31-B8EA-4CE0-A9A4-ACEB7B63040D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{031E7F31-B8EA-4CE0-A9A4-ACEB7B63040D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{031E7F31-B8EA-4CE0-A9A4-ACEB7B63040D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{031E7F31-B8EA-4CE0-A9A4-ACEB7B63040D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
