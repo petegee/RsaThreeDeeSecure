@@ -12,9 +12,11 @@ jobs:
     - name: Publish to Nuget
       run: |
         export t=$(git describe --tags `git rev-list --tags --max-count=1`)
-        echo ${t}
         cd RsaThreeDeeSecure
         sed -i -e "s/0.0.0/${t}/g" ./RsaThreeDeeSecure.csproj
-        cat  ./RsaThreeDeeSecure.csproj
+        echo === Building Project ===
+        dotnet build --configuration Release
+        echo === Building Nuget Package ===
         dotnet pack --output package --configuration Release
+        echo === Pushing Nuget Package ===
         dotnet nuget push ./package/RsaThreeDeeSecure.${t}.nupkg -k ${{ secrets.nuget_token }} -s https://api.nuget.org/v3/index.json
