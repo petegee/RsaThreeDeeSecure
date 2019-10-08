@@ -3,7 +3,7 @@ using RsaThreeDeeSecure.Messages.Shared;
 
 namespace RsaThreeDeeSecure.Messages.Requests
 {
-    public class FetchAvailableAliasesRequests
+    public class FetchAvailableAliasesRequest
     {
         [JsonProperty("service")] 
         public string Service { get; set; }
