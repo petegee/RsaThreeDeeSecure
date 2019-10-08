@@ -14,10 +14,3 @@ jobs:
     - name: Unit Test
       run: |
         dotnet test
-    - name: Publish to Nuget
-      run: |
-        dotnet pack --configuration Release
-        echo hello
-        pwd
-        ls
-        dotnet nuget push ./bin/Debug/RsaThreeDeeSecure.1.0.0.nupkg -k ${{ secrets.nuget_token }} -s https://api.nuget.org/v3/index.json
