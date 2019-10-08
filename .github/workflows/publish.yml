@@ -14,6 +14,7 @@ jobs:
         export t=$(git describe --tags `git rev-list --tags --max-count=1`)
         echo ${t}
         cd RsaThreeDeeSecure
-        sed -i -e 's/0.0.0/$t/g' ./RsaThreeDeeSecure.csproj
+        sed -i -e 's/0.0.0/${t}/g' ./RsaThreeDeeSecure.csproj
+        cat  ./RsaThreeDeeSecure.csproj
         dotnet pack --output package --configuration Release
         dotnet nuget push ./package/RsaThreeDeeSecure.${t}.nupkg -k ${{ secrets.nuget_token }} -s https://api.nuget.org/v3/index.json
