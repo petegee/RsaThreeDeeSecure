@@ -27,7 +27,7 @@ namespace RsaThreeDeeSecure.Messages.Requests
         public string PanExpirationMonth { get; set; }
         
         [JsonProperty("purchaseAttributes")] 
-        public PurchaseAttributes[] PurchaseAttributes { get; set; }
+        public PurchaseAttributes PurchaseAttributes { get; set; }
         
         [JsonProperty("timeStamp")] 
         public string TimeStamp { get; set; }
