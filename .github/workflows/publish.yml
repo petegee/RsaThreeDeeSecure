@@ -16,7 +16,7 @@ jobs:
         sed -i -e "s/0.0.0/${t}/g" ./RsaThreeDeeSecure.csproj
         echo === Building Project ===
         dotnet build --configuration Release
-        echo === Building Nuget Package ===
+        echo === Building Nuget Package Version ${t} ===
         dotnet pack --output package --configuration Release
-        echo === Pushing Nuget Package ===
+        echo === Pushing Nuget Package===
         dotnet nuget push ./package/RsaThreeDeeSecure.${t}.nupkg -k ${{ secrets.nuget_token }} -s https://api.nuget.org/v3/index.json
