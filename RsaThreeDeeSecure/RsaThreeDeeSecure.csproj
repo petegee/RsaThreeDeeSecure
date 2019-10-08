@@ -3,18 +3,16 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Authors>PeteGee</Authors>
         <Company>Deft NZ</Company>
         <Description>Basic Library to do the heavy lifting when implementing RSA 3D Secure Version 3.0 and above.</Description>
-        <license type="file">LICENSE</license>
-        <Copyright>MIT Licence</Copyright>
+        <Copyright>2019 Deft NZ - MIT Licence</Copyright>
         <PackageProjectUrl>https://github.com/petegee/RsaThreeDeeSecure</PackageProjectUrl>
         <RepositoryUrl>https://github.com/petegee/RsaThreeDeeSecure</RepositoryUrl>
         <RepositoryType>Git</RepositoryType>
         <PackageId>RsaThreeDeeSecure</PackageId>
         <PackageTags>RSA, 3DS, 3D Secure, JWE, JWS, JWT</PackageTags>
-        <Version>1.0.0</Version>
+        <Version>0.0.0</Version>
     </PropertyGroup>
 
     <ItemGroup>
