@@ -1,8 +1,6 @@
 name: PushToNuget
 
-on:
-  release
-    types: [published]
+on: [release]
 
 jobs:
   build:
