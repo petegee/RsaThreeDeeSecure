@@ -6,6 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 using Jose;
 using Newtonsoft.Json;
 using RsaThreeDeeSecure.Constants;
+using RsaThreeDeeSecure.Exceptions;
 using RsaThreeDeeSecure.Extensions;
 
 namespace RsaThreeDeeSecure.Jwe
@@ -67,7 +68,7 @@ namespace RsaThreeDeeSecure.Jwe
                     protectedHeader.EncryptionPublicCert = 
                         System.Text.Encoding.UTF8.GetBytes(
                             protectedHeader.Certs.FirstOrDefault() 
-                                ?? throw new ApplicationException("No encryption public cert was found. "));
+                                ?? throw new Rsa3dSecureException(RsaErrorCodes.IssuerError, "No encryption public cert was found. "));
                     
                     return protectedHeader;
                 }

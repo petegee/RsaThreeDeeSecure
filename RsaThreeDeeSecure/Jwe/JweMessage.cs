@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -7,6 +6,7 @@ using System.Text;
 using Jose;
 using Newtonsoft.Json;
 using RsaThreeDeeSecure.Constants;
+using RsaThreeDeeSecure.Exceptions;
 using RsaThreeDeeSecure.Extensions;
 
 namespace RsaThreeDeeSecure.Jwe
@@ -61,7 +61,7 @@ namespace RsaThreeDeeSecure.Jwe
             };
             
             if(!message.IsSignatureValidAndTrusted())
-                throw new ApplicationException("Message Signature is not valid.");
+                throw new Rsa3dSecureException(RsaErrorCodes.VerifySignatureFailed, "Message Signature is not valid.");
 
             return message.GetDecryptedJsonObjectAs<T>();
         }
@@ -118,7 +118,7 @@ namespace RsaThreeDeeSecure.Jwe
         private bool MessageSignatureIsValid()
         {
             if(!string.Equals(Header.Alg, JweHeaderConstants.AlgValueRs256))
-                throw new ApplicationException($"Unexpected Signing algorithm {Header.Alg}. Expected {JweHeaderConstants.AlgValueRs256}");
+                throw new Rsa3dSecureException(RsaErrorCodes.IssuerError, $"Unexpected Signing algorithm {Header.Alg}. Expected {JweHeaderConstants.AlgValueRs256}");
             
             var signingCertPublicKey = Header.SigningPublicCert.GetRSAPublicKey();
             
