@@ -1,0 +1,17 @@
+name: PushToNuget
+
+on:
+  release
+    types: [published]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    - name: Publish to Nuget
+      run: |
+        dotnet pack
+        dotnet nuget push RsaThreeDeeSecure.1.0.0.nupkg -k ${{ secrets.nuget_token }} -s https://api.nuget.org/v3/index.json
