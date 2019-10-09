@@ -16,7 +16,7 @@ namespace RsaThreeDeeSecure.Messages.Shared
         public string DisplayAlias { get; set; }
         
         [JsonProperty("aliasType")] 
-        public AliasTypes AliasType { get; set; }
+        public string AliasType { get; set; }
 
         [JsonProperty("displayAliasType")] 
         public string DisplayAliasType { get; set; }
