@@ -23,7 +23,7 @@ namespace RsaThreeDeeSecure.Jwe
         
         private string EncryptedMessage { get; set; }
         
-        public static JweMessage FromEncryptedString(string b64MessageToDecrypt, X509Certificate2 encryptionCert, IJweCryptoPolicy cryptoPolicy)
+        public static JweMessage FromEncryptedString(string b64MessageToDecrypt, List<X509Certificate2> issuerEncryptionCerts, IJweCryptoPolicy cryptoPolicy)
         {
             var parts = b64MessageToDecrypt.SplitInToSections();
 
@@ -37,12 +37,12 @@ namespace RsaThreeDeeSecure.Jwe
                 CryptoPolicy = cryptoPolicy,
                 EncryptedMessage = b64MessageToDecrypt,
                 Header = jwsHeader,
-                Payload = JweEncryptedPayload.CreateFromEncryptedPayload(verifiedPayload, encryptionCert.GetRSAPrivateKey()),
+                Payload = JweEncryptedPayload.CreateFromEncryptedPayload(verifiedPayload, issuerEncryptionCerts),
                 Signature = new JweSignature(parts[2])
             };
         }
         
-        public static T FromEncryptedString<T>(string b64MessageToDecrypt, X509Certificate2 encryptionCert, IJweCryptoPolicy cryptoPolicy)
+        public static T FromEncryptedString<T>(string b64MessageToDecrypt, List<X509Certificate2> issuerEncryptionCerts, IJweCryptoPolicy cryptoPolicy)
         {
             var parts = b64MessageToDecrypt.SplitInToSections();
 
@@ -56,7 +56,7 @@ namespace RsaThreeDeeSecure.Jwe
                 CryptoPolicy = cryptoPolicy,
                 EncryptedMessage = b64MessageToDecrypt,
                 Header = jwsHeader,
-                Payload = JweEncryptedPayload.CreateFromEncryptedPayload(verifiedPayload, encryptionCert.GetRSAPrivateKey()),
+                Payload = JweEncryptedPayload.CreateFromEncryptedPayload(verifiedPayload, issuerEncryptionCerts),
                 Signature = new JweSignature(parts[2])
             };
             

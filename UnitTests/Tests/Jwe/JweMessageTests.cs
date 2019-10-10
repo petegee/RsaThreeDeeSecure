@@ -50,7 +50,7 @@ namespace UnitTests.Tests.Jwe
 
                 var decryptedMessage = JweMessage.FromEncryptedString<GetCardInfoRequest>(
                     jweMessage,
-                    IssuerEncryptionCert.GetP12Cert(),
+                    new List<X509Certificate2>{ IssuerEncryptionCert.GetP12Cert()},
                     new DevJweCryptoPolicy());
                 
                 decryptedMessage.Should().BeEquivalentTo(CardInfoMessage);
@@ -69,7 +69,7 @@ namespace UnitTests.Tests.Jwe
             {
                 var message = JweMessage.FromEncryptedString(
                     CardInfoEncryptedMessage,
-                    IssuerEncryptionCert.GetP12Cert(),
+                    new List<X509Certificate2>{ IssuerEncryptionCert.GetP12Cert()},
                     new DevJweCryptoPolicy());
 
                 message.IsSignatureValidAndTrusted().Should().BeTrue();
@@ -86,7 +86,7 @@ namespace UnitTests.Tests.Jwe
             {
                 var message = JweMessage.FromEncryptedString(
                     CardInfoEncryptedMessage,
-                    IssuerEncryptionCert.GetP12Cert(),
+                    new List<X509Certificate2>{ IssuerEncryptionCert.GetP12Cert()},
                     new DevJweCryptoPolicy());
 
                 var cardInfoRequest = message.GetDecryptedJsonObjectAs<GetCardInfoRequest>();

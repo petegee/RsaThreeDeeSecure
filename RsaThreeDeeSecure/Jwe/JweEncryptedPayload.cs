@@ -15,17 +15,44 @@ namespace RsaThreeDeeSecure.Jwe
     {
         public class JweEncryptedPayload
         {
-            public static JweEncryptedPayload CreateFromEncryptedPayload(string payloadB64, RSA encryptionCert)
+            public static JweEncryptedPayload CreateFromEncryptedPayload(string payloadB64, List<X509Certificate2> issuerEncryptionCerts)
             {
                 var splitPayload = payloadB64.SplitInToSections();
+                var header = JweHeader.CreateFromEncryptedHeader(splitPayload[0]);
+                var encryptionPrivateKey = FindPrivateKeyForEncryptionCert(issuerEncryptionCerts, header.Certs.FirstOrDefault());
+                
                 return new JweEncryptedPayload
                 {
                     Header = JweHeader.CreateFromEncryptedHeader(splitPayload[0]),
                     AuthTag = splitPayload[4],
-                    ClearTextMessage = Decode(payloadB64, encryptionCert)
+                    ClearTextMessage = Decode(payloadB64, encryptionPrivateKey)
                 };
             }
-            
+
+            private static RSA FindPrivateKeyForEncryptionCert(IEnumerable<X509Certificate2> issuerEncryptionCerts, string headerEncryptionPublicCertBase64)
+            {
+                var matchingCertificate = issuerEncryptionCerts
+                    .FirstOrDefault(c => 
+                        Convert.ToBase64String(c.Export(X509ContentType.Cert)) == headerEncryptionPublicCertBase64);
+                
+                if (matchingCertificate == null)
+                {
+                    throw new Rsa3dSecureException(
+                        RsaErrorCodes.DecryptionFailed, 
+                        "No matching private encryption key found for encryption public sent in JWE protected header X5C property");             
+                }
+                
+                var privateEncryptionKey = matchingCertificate.GetRSAPrivateKey();
+                if (privateEncryptionKey == null)
+                {
+                    throw new Rsa3dSecureException(
+                        RsaErrorCodes.DecryptionFailed, 
+                        "The located issuer encryption certificate did not have an associated private key.");             
+                }
+
+                return privateEncryptionKey;
+            }
+
             public static JweEncryptedPayload CreateFromClearTextMessage(string clearTextMessage, X509Certificate2 issuerEncryptionCert)
             {
                 var encryptedPayload = JWT.Encode(
@@ -65,11 +92,7 @@ namespace RsaThreeDeeSecure.Jwe
                 {
                     var headerString = headerB64.DecodeBase64();
                     var protectedHeader = JsonConvert.DeserializeObject<JweHeader>(headerString);
-                    protectedHeader.EncryptionPublicCert = 
-                        System.Text.Encoding.UTF8.GetBytes(
-                            protectedHeader.Certs.FirstOrDefault() 
-                                ?? throw new Rsa3dSecureException(RsaErrorCodes.IssuerError, "No encryption public cert was found. "));
-                    
+
                     return protectedHeader;
                 }
 
@@ -81,9 +104,6 @@ namespace RsaThreeDeeSecure.Jwe
             
                 [JsonProperty(JweHeaderConstants.X5C)]
                 public List<string> Certs { get; set; }
-
-                [JsonIgnore]
-                public byte[] EncryptionPublicCert { get; set; }
             }
 
         }
